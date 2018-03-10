@@ -1,0 +1,9 @@
+Conf Files should be named "<Your Username>.conf".
+
+ideally create them through the resolver application itself, however you can 
+manually create one by just creating a file with the above naming convention.
+The contents will need to be exactly as follows (excluding file start and end):
+<----File Start---->
+PrimaryDNS: int.int.int.int
+SecondaryDNS: int.int.int.int
+<----File End------>
