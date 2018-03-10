@@ -5,8 +5,8 @@ dependencies: readline-sync;
 
 
 function sleep(millis) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + millis);
+	var start = new Date().getTime();
+	while (new Date().getTime() < start + millis);
 }
 
 function getPathTo(string){
@@ -32,11 +32,11 @@ function askQuestions(oSession){
 function writeConf(oFs,sConfName,sConfContents){
 	console.log("writing:" +sConfName+"\nwith: \n"+sConfContents)
 	var sConfFullName = sConfName;
-	oFs.writeFileSync(sConfFullName, sConfContents, function(err) {
-    	if(err) {
-       		return console.log(err);
-    	}
-	});
+	oFs.writeFileSync(sConfFullName, sConfContents)/*, function(err) {
+		if(err) {
+			return console.log(err);
+		}
+	});*/
 }
 
 function CreateConf(oFs,oSession) {
@@ -86,9 +86,7 @@ function ScanDir(oFs,oSession){
 function CheckForArrayMatch(LookFor,InArray){
 	var numberMatches = 0 
 	for(i=0;i<InArray.length;i++){
-		console.log("checking "+LookFor+" against "+InArray[i])
 		if(LookFor == InArray[i]){
-			console.log("match found")
 			numberMatches++
 		}
 	}
