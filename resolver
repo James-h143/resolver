@@ -5,8 +5,8 @@ dependencies: readline-sync;
 
 
 function sleep(millis) {
-	var start = new Date().getTime();
-	while (new Date().getTime() < start + millis);
+	var slp = require('sleep');
+	slp.msleep(millis);
 }
 
 function getPathTo(string){
