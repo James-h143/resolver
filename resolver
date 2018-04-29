@@ -125,7 +125,6 @@ function updateResolvConf(oFs, oSession){
 }
 
 function DisplayErrors(oFs,oSession,aErrors){
-	console.log(aErrors.length);
 	if(aErrors.length>0){
 		console.log("Aborting script for following reason(s):\n")
 		for(i=0;i<aErrors.length;i++){
