@@ -124,10 +124,37 @@ function updateResolvConf(oFs, oSession){
 	}
 }
 
+function DisplayErrors(oFs,oSession,aErrors){
+	console.log(aErrors.length);
+	if(aErrors.length>0){
+		console.log("Aborting script for following reason(s):\n")
+		for(i=0;i<aErrors.length;i++){
+			console.log(aErrors[i])
+		}
+		process.exit();
+	}
+
+}
+
+function RunChecks(oFs,oSession){
+	var aErrors = [];
+	if(oSession.sUserName != "root"){
+		aErrors.push("resolver must be run as root. Try 'sudo node /path/to/resolver'")
+		aErrors.push("Test Error 1")
+		aErrors.push("Test Error 2")
+	}
+	DisplayErrors(oFs,oSession,aErrors)
+}
+
 function main(oSession){
 	if(oSession.bRun == true){
 		var oFs = require('fs');
 		ScanDir(oFs,oSession);
+		if(oSession.iCycle == 0){
+			console.log("Program Running");
+			RunChecks(oFs,oSession);
+			oSession.iCycle++;
+		}
 		updateResolvConf(oFs,oSession);
 		sleep(oSession.iRefreshTimeSecs*1000); //TO DO: Figure why npm sleep wont install and use that
 		main(oSession);
@@ -143,6 +170,7 @@ function session(){
 	this.sPrimaryDNS = undefined;
 	this.sSecondaryDNS = undefined;
 	this.sConfFullName = undefined;
+	this.iCycle = 0
 }
 
 var oSession = new session();
