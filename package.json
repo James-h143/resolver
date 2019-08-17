@@ -1,0 +1,24 @@
+{
+  "name": "resolver",
+  "version": "1.0.0",
+  "description": "Program to ensure resolv.conf says what it should say",
+  "main": "resolver.js",
+  "dependencies": {
+    "readline-sync": "^1.4.10",
+    "sleep": "^5.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node resolver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameshennigan/resolver.git"
+  },
+  "author": "James Hennigan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jameshennigan/resolver/issues"
+  },
+  "homepage": "https://github.com/jameshennigan/resolver#readme"
+}

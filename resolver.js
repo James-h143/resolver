@@ -2,7 +2,11 @@
 dependencies: readline-sync; 
 
 ------------------------------------------------------------------*/
-
+const sys = require('sys')
+const exec = require('child_process').exec;
+function puts(error, stdout, stderr) { 
+	sys.puts(stdout) 
+}
 
 function sleep(millis) {
 	var slp = require('sleep');
@@ -145,30 +149,38 @@ function RunChecks(oFs,oSession){
 	DisplayErrors(oFs,oSession,aErrors)
 }
 
+async function startVPN(oSession){
+	
+	exec("ls -la", puts);
+
+}
+
 function main(oSession){
-	if(oSession.bRun == true){
+	while(oSession.bRun === true){
+		//console.log("loop")
 		var oFs = require('fs');
 		ScanDir(oFs,oSession);
 		if(oSession.iCycle == 0){
 			console.log("Program Running");
 			RunChecks(oFs,oSession);
+			startVPN(oSession);
 			oSession.iCycle++;
 		}
 		updateResolvConf(oFs,oSession);
 		sleep(oSession.iRefreshTimeSecs*1000); //TO DO: Figure why npm sleep wont install and use that
-		main(oSession);
 	}
 }
 
 function session(){
 	this.bRun = true;
-	this.iRefreshTimeSecs = 10;
+	this.iRefreshTimeSecs = 5;
 	this.sUserName = undefined; 
 	this.sScriptDir = undefined;
 	this.sResolvConf = "/etc/resolv.conf"
 	this.sPrimaryDNS = undefined;
 	this.sSecondaryDNS = undefined;
 	this.sConfFullName = undefined;
+	this.DefaultVPNNodeOut = "Norway";
 	this.iCycle = 0
 }
 
